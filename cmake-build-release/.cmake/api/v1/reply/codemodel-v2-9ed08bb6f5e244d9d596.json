@@ -1,0 +1,101 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"jsonFile" : "directory-.-Release-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "CommonMod",
+					"jsonFile" : "directory-CommonMod-Release-7754bed634766204d086.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "CommonMod",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "UniversalRemapper",
+					"jsonFile" : "directory-UniversalRemapper-Release-60661fea983953b52c5a.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "UniversalRemapper",
+					"targetIndexes" : 
+					[
+						1
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2
+					],
+					"name" : "UniversalRemapper",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "CommonMod::@97d44fc91b809357b631",
+					"jsonFile" : "target-CommonMod-Release-195c6fde3cfce637906f.json",
+					"name" : "CommonMod",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "UniversalRemapper::@b694fe6fac1d4df9b48f",
+					"jsonFile" : "target-UniversalRemapper-Release-367caa77c4d0092d7388.json",
+					"name" : "UniversalRemapper",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/theli/Documents/Modding/Prey Modding/ChairloaderMods/UniversalRemapper/cmake-build-release",
+		"source" : "C:/Users/theli/Documents/Modding/Prey Modding/ChairloaderMods/UniversalRemapper"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}
