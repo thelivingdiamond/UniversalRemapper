@@ -1,4 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2022.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2022.2/bin/ninja/win/ninja.exe" -DCMAKE_TOOLCHAIN_FILE=C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake "-DCHAIRLOADER_COMMON_PATH=C:\Users\theli\Documents\Modding\Prey Modding\Learning2Hack\ChairLoader\Common" -G Ninja -S "C:\Users\theli\Documents\Modding\Prey Modding\ChairloaderMods\UniversalRemapper" -B "C:\Users\theli\Documents\Modding\Prey Modding\ChairloaderMods\UniversalRemapper\cmake-build-release"
--- Configuring done
--- Generating done
--- Build files have been written to: C:/Users/theli/Documents/Modding/Prey Modding/ChairloaderMods/UniversalRemapper/cmake-build-release
