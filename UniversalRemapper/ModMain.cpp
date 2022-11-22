@@ -4,6 +4,7 @@
 #include <Prey/CryAction/ActionMapManager.h>
 #include <Prey/CryAction/ActionFilter.h>
 #include <pugixml.hpp>
+#include "ImGui/imgui_internal.h"
 
 ModMain* gMod = nullptr;
 
@@ -38,6 +39,8 @@ static bool ArkPlayer_HasAbility_Hook(ArkPlayer* _this, uint64_t _abilityID)
 
 #endif
 
+#define MOD_NAME "thelivingdiamond.UniversalRemapper"
+
 void ModMain::FillModInfo(ModDllInfo& info)
 {
 	info.thisStructSize = sizeof(ModDllInfo);
@@ -62,6 +65,13 @@ void ModMain::InitSystem(const ModInitInfo& initInfo, ModDllInfo& dllInfo)
 {
 	BaseClass::InitSystem(initInfo, dllInfo);
 	// Your code goes here
+    auto success = m_actionCategoryDoc.load_file("Mods/" MOD_NAME "/ActionsByCategories.xml");
+    if (!success)
+    {
+        CryError("Failed to load ActionsByCategories.xml");
+        return;
+    }
+    m_actionCategoryNode = m_actionCategoryDoc.first_child();
 }
 
 void ModMain::InitGame(bool isHotReloading)
@@ -84,13 +94,6 @@ void dumpActionMaps() {
             auto actionNode = root.append_child("Action");
             actionNode.append_attribute("ActionMap") = actionMap.first.c_str();
             actionNode.append_attribute("ActionID") = action->GetActionId().c_str();
-//            for(int j = 0; j < action->GetNumActionInputs(); j++){
-//                auto actionInput = action->GetActionInput(j);
-//                auto actionInputNode = actionNode.append_child("ActionInput");
-//                actionInputNode.append_attribute("Input") = actionInput->input.c_str();
-//                actionInputNode.append_attribute("InputDevice") = actionInput->inputDevice;
-//                actionInputNode.append_attribute("DefaultInput") = actionInput->defaultInput;
-//            }
         }
     }
     doc.save_file("ActionDumpNoBinds.xml");
@@ -109,9 +112,156 @@ void ModMain::Draw()
         ImGui::EndMainMenuBar();
     }
     if(m_bDraw) {
+        ImGui::PushStyleVar(ImGuiStyleVar_Alpha, 1.0f);
         if (ImGui::Begin("Universal Remapper")) {
-            auto ActionMapManager = (CActionMapManager *) gCL->cl->GetFramework()->GetIActionMapManager();
+            auto ActionMapManager = (CActionMapManager*) gCL->cl->GetFramework()->GetIActionMapManager();
+//            	eAID_Unknown       = 0,
+//	            eAID_KeyboardMouse = BIT(0),
+//	            eAID_XboxPad       = BIT(1),
+//	            eAID_PS4Pad        = BIT(2),
+//	            eAID_OculusTouch   = BIT(3),
+            static const char* deviceNames[] = {"Unknown", "Keyboard/Mouse", "Xbox Controller", "PS4 Controller", "Oculus Touch"};
+            static int* currentCombo = new int(EActionInputDevice::eAID_KeyboardMouse);
+            ImGui::Combo("Device", currentCombo, deviceNames, IM_ARRAYSIZE(deviceNames));
+            auto device = (EActionInputDevice) *currentCombo;
             if (ImGui::BeginTabBar("Input Methods Tab Bar")) {
+                static float minimumColumnWidth = 300;
+                if(ImGui::BeginTabItem("Actions")) {
+                    // calculate the number of columns that fit in the current window width
+                    int columns = (int) (ImGui::GetWindowWidth() / minimumColumnWidth);
+                    if (columns < 1) columns = 1;
+                    // distribute the categories evenly across the columns
+                    static ImGuiTextFilter filter;
+                    filter.Draw();
+                    if(ImGui::BeginTable("Category Table", columns)) {
+                        ImGui::TableNextColumn();
+                        int j = 0;
+                        for (int i = 0; i < columns; i++) {
+                            j = 0;
+                            ImGui::TableSetColumnIndex(i);
+                            // every nth category is in the same column
+                            for (auto category : m_actionCategoryNode.children()) {
+                                auto column = j % columns;
+                                if (column == i) {
+                                    bool showCategory = false;
+                                    for(auto actions : category){
+                                        if(filter.PassFilter(actions.attribute("ActionID").as_string()))
+                                            showCategory = true;
+                                    }
+                                    if(showCategory) {
+                                        std::string categoryName = category.attribute("name").as_string();
+                                        ImGui::Separator();
+                                        if(ImGui::CollapsingHeader(categoryName.c_str(), ImGuiTreeNodeFlags_DefaultOpen)) {
+                                            if (ImGui::BeginTable(categoryName.c_str(), 3, ImGuiTableFlags_RowBg | ImGuiTableFlags_BordersInnerH)) {
+                                                ImGui::TableSetupColumn("Action");
+                                                ImGui::TableSetupColumn("Binding");
+                                                ImGui::TableSetupColumn("##Buttons", ImGuiTableColumnFlags_WidthFixed, 18.0f);
+                                                ImGui::TableHeadersRow();
+                                                for (auto actions: category) {
+                                                    if (filter.PassFilter(actions.attribute("ActionID").as_string())) {
+                                                        // Groups
+                                                        if (actions.name() == std::string("ActionGroup")) {
+                                                            bool noMismatch = true;
+                                                            ImGui::TableNextRow();
+                                                            ImGui::TableNextColumn();
+                                                            ImGui::Text("Group: %s", actions.attribute("ActionID").as_string());\
+                                                            ImGui::TableNextColumn();
+                                                            //TODO: handle the action groups
+                                                            std::vector<std::string> inputs;
+                                                            bool firstAction = true;
+                                                            for(auto & action: actions){
+                                                                auto actionMap = (CActionMap*)ActionMapManager->m_actionMaps[action.attribute("ActionMap").as_string()];
+                                                                if(actionMap){
+                                                                    auto actionMapped = (CActionMapAction*)actionMap->GetAction(CCryName(action.attribute("ActionID").as_string()));
+                                                                    if(actionMapped){
+                                                                        if(firstAction) {
+                                                                            for (auto &input: actionMapped->m_actionInputs) {
+                                                                                inputs.emplace_back(input->input.c_str());
+                                                                            }
+                                                                            firstAction = false;
+                                                                        } else {
+                                                                            for (auto &input: actionMapped->m_actionInputs) {
+                                                                                if(std::find(inputs.begin(), inputs.end(), input->input.c_str()) == inputs.end()){
+                                                                                    noMismatch = false;
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                            if(noMismatch){
+                                                                for(auto &input: inputs){
+                                                                    ImGui::TextColored(ImVec4(0.0f,1.0f,0.0f,1.0f), "%s", input.c_str());
+                                                                }
+                                                            } else {
+                                                                ImGui::TextColored(ImVec4(1.0f,0.0f,0.0f,1.0f), "INPUTS MISMATCH");
+                                                                // display all inputs in the group
+                                                                for(auto &action: actions){
+                                                                    auto actionMap = (CActionMap*)ActionMapManager->m_actionMaps[action.attribute("ActionMap").as_string()];
+                                                                    if(actionMap){
+                                                                        auto actionMapped = (CActionMapAction*)actionMap->GetAction(CCryName(action.attribute("ActionID").as_string()));
+                                                                        if(actionMapped){
+                                                                            for (auto &input: actionMapped->m_actionInputs) {
+                                                                                ImGui::TextColored(ImVec4(1.0f,0.0f,0.0f,1.0f), "%s.%s: %s", action.attribute("ActionMap").as_string(), action.attribute("ActionID").as_string(), input->input.c_str());
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        // Actions
+                                                        else {
+                                                            ImGui::TableNextRow();
+                                                            ImGui::TableNextColumn();
+                                                            ImGui::Text("%s", /*actions.attribute("ActionMap").as_string(),*/ actions.attribute("ActionID").as_string());
+                                                            if(ImGui::IsItemHovered() && GImGui->HoveredIdTimer > 0.5f){
+                                                                ImGui::BeginTooltip();
+                                                                ImGui::Text("%s", actions.attribute("ActionID").as_string());
+                                                                ImGui::EndTooltip();
+                                                            }
+                                                            ImGui::TableNextColumn();
+                                                            auto map = ActionMapManager->m_actionMaps.find(actions.attribute("ActionMap").as_string());
+                                                            if (map != ActionMapManager->m_actionMaps.end()) {
+                                                                auto actionMap = map->second;
+                                                                auto mappedAction = ((CActionMap *) actionMap)->m_actions.find(CCryName(actions.attribute("ActionID").as_string()));
+                                                                if (mappedAction != ((CActionMap *) actionMap)->m_actions.end()) {
+                                                                    auto &action = mappedAction->second;
+                                                                    bool isBound = false;
+                                                                    for (auto &actionInput: action.m_actionInputs) {
+                                                                        if (actionInput->inputDevice == device || device == EActionInputDevice::eAID_Unknown) {
+                                                                            isBound = true;
+                                                                            ImGui::Selectable(actionInput->input.c_str());
+                                                                        }
+                                                                    }
+                                                                    if (action.m_actionInputs.empty() || !isBound) {
+                                                                        ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyleColorVec4(ImGuiCol_TextDisabled));
+                                                                        ImGui::Selectable("None");
+                                                                        ImGui::PopStyleColor();
+                                                                    } else if (!action.m_actionInputs.empty()) {
+                                                                        ImGui::TableNextColumn();
+                                                                        ImGui::SmallButton("+");
+                                                                    }
+                                                                } else {
+                                                                    ImGui::TextDisabled("Action Not Found");
+                                                                }
+                                                            } else {
+                                                                ImGui::Text("ActionMap not found");
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                ImGui::EndTable();
+                                            }
+                                        }
+                                    }
+                                }
+                                j++;
+                            }
+                        }
+                        ImGui::EndTable();
+                    }
+                    ImGui::EndTabItem();
+                }
                 if (ImGui::BeginTabItem("Keyboard/Mouse")) {
                     if (ImGui::BeginTabBar("Keyboard/Mouse Maps")) {
                         for (auto &ActionMap: ActionMapManager->m_actionMaps) {
@@ -206,6 +356,7 @@ void ModMain::Draw()
             }
         }
         ImGui::End();
+        ImGui::PopStyleVar();
     }
 }
 

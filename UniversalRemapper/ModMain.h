@@ -42,10 +42,11 @@ class ModMain : public ChairloaderModBase
 	virtual void ShutdownSystem(bool isHotUnloading) override;
 
 private:
+    pugi::xml_document m_actionCategoryDoc;
+    pugi::xml_node m_actionCategoryNode;
     bool m_bDraw;
     // Your code goes here
     void RemapKey(CCryName ActionID, std::string ActionMap, std::string keyName);
-
     bool m_bWaitingForInput = false;
     IActionMap* m_pActionMapToRemap = nullptr;
     IActionMapAction* m_pActionToRemap = nullptr;
