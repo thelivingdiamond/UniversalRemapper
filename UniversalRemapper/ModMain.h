@@ -46,11 +46,39 @@ private:
     pugi::xml_node m_actionCategoryNode;
     bool m_bDraw;
     // Your code goes here
-    void RemapKey(CCryName ActionID, std::string ActionMap, std::string keyName);
-    bool m_bWaitingForInput = false;
-    IActionMap* m_pActionMapToRemap = nullptr;
-    IActionMapAction* m_pActionToRemap = nullptr;
-    SActionInput* m_pActionInputToRemap = nullptr;
+
+    bool rebindKeybind(std::string actionID, std::string actionMap, std::string currentBinding = "");
+
+    bool addKeybind(std::string actionID, std::string actionMap);
+
+    bool removeKeybind(std::string actionID, std::string actionMap, std::string currentBinding);
+
+    bool rebindKeybindGroup(std::string actionID, std::vector<std::string> actionMaps, std::string currentBinding = "");
+
+    bool addKeybindGroup(std::string actionID, std::vector<std::string> actionMaps);
+
+    bool removeKeybindGroup(std::string actionID, std::vector<std::string> actionMaps, std::string currentBinding);
+
+    void listenForInput();
+
+    EActionInputDevice m_device;
+
+    enum class KeybindAction
+    {
+        None,
+        Add,
+        Remove,
+        Rebind,
+    };
+    KeybindAction m_keybindAction = KeybindAction::None;
+    bool m_bListeningForInput = false;
+    bool m_bGroup = false;
+    std::string m_actionID;
+    std::string m_actionMap;
+    std::vector<std::string> m_actionMaps;
+    std::string m_currentBinding;
+    std::string m_newBinding;
+
 };
 
 extern ModMain* gMod;
