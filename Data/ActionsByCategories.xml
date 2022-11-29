@@ -1,383 +1,388 @@
 <?xml version="1.0"?>
 <ActionMaps>
-	<category name="movement">
-		<ActionGroup ActionID="jump">
-			<Action ActionMap="player" ActionID="jump" />
+	<category name="Movement">
+		<ActionGroup ActionID="jump" baseActionMap="player" displayName="Jump">
+			<Action ActionMap="player" ActionID="jump"/>
 			<Action ActionMap="world_ui_examination" ActionID="jump" />
 			<Action ActionMap="mimic_grab" ActionID="jump" />
 			<Action ActionMap="focusmode" ActionID="jump" />
 		</ActionGroup>
-		<ActionGroup ActionID="sneak">
+		<ActionGroup ActionID="sneak" baseActionMap="player" displayName="Sneak/Crouch">
 			<Action ActionMap="player" ActionID="sneak" />
 			<Action ActionMap="mimic_grab" ActionID="sneak" />
 			<Action ActionMap="focusmode" ActionID="sneak" />
 		</ActionGroup>
-		<ActionGroup ActionID="sprint">
+		<ActionGroup ActionID="sprint" baseActionMap="player" displayName="Sprint">
 			<Action ActionMap="player" ActionID="sprint" />
 			<Action ActionMap="mimic_grab" ActionID="sprint" />
 			<Action ActionMap="etherDuplicate" ActionID="sprint" />
 			<Action ActionMap="focusmode" ActionID="sprint" />
 		</ActionGroup>
-		<ActionGroup ActionID="leanleft">
+		<ActionGroup ActionID="leanleft" baseActionMap="player" displayName="Lean Left">
 			<Action ActionMap="player" ActionID="leanleft" />
 			<Action ActionMap="focusmode" ActionID="leanleft" />
 		</ActionGroup>
-		<ActionGroup ActionID="leanright">
+		<ActionGroup ActionID="leanright" baseActionMap="player" displayName="Lean Right">
 			<Action ActionMap="player" ActionID="leanright" />
 			<Action ActionMap="focusmode" ActionID="leanright" />
 		</ActionGroup>
 		<!-- keyboard x/y movement -->
-		<ActionGroup ActionID="moveleft">
+		<ActionGroup ActionID="moveleft" baseActionMap="default" displayName="Move Left">
 			<Action ActionMap="default" ActionID="moveleft" />
 			<Action ActionMap="mimic_grab" ActionID="moveleft" />
 			<Action ActionMap="etherDuplicate" ActionID="moveleft" />
 		</ActionGroup>
-		<ActionGroup ActionID="moveright">
+		<ActionGroup ActionID="moveright" baseActionMap="default" displayName="Move Right">
 			<Action ActionMap="default" ActionID="moveright" />
 			<Action ActionMap="mimic_grab" ActionID="moveright" />
 			<Action ActionMap="etherDuplicate" ActionID="moveright" />
 		</ActionGroup>
-		<ActionGroup ActionID="moveforward">
+		<ActionGroup ActionID="moveforward" baseActionMap="default" displayName="Move Forward">
 			<Action ActionMap="default" ActionID="moveforward" />
 			<Action ActionMap="mimic_grab" ActionID="moveforward" />
 			<Action ActionMap="etherDuplicate" ActionID="moveforward" />
 		</ActionGroup>
-		<ActionGroup ActionID="moveback">
+		<ActionGroup ActionID="moveback" baseActionMap="default" displayName="Move Back">
 			<Action ActionMap="default" ActionID="moveback" />
 			<Action ActionMap="mimic_grab" ActionID="moveback" />
 			<Action ActionMap="etherDuplicate" ActionID="moveback" />
 		</ActionGroup>
 		<!-- controller x/y movement -->
-		<ActionGroup ActionID="xi_movex">
+		<ActionGroup ActionID="xi_movex" baseActionMap="default" displayName="Controller Move L/R">
 			<Action ActionMap="default" ActionID="xi_movex" />
 			<Action ActionMap="mimic_grab" ActionID="xi_movex" />
 			<Action ActionMap="etherDuplicate" ActionID="xi_movex" />
 		</ActionGroup>
-		<ActionGroup ActionID="xi_movey">
+		<ActionGroup ActionID="xi_movey" baseActionMap="default" displayName="Controller Move F/B">
 			<Action ActionMap="default" ActionID="xi_movey" />
 			<Action ActionMap="mimic_grab" ActionID="xi_movey" />
 			<Action ActionMap="etherDuplicate" ActionID="xi_movey" />
 		</ActionGroup>
 	</category>
-	<category name="use">
-		<Action ActionMap="player" ActionID="Carry" />
-
-		<ActionGroup ActionID="use">
+	<category name="Use Things">
+		<ActionGroup ActionID="Carry" baseActionMap="player" displayName="Carry">
+			<Action ActionMap="player" ActionID="Carry" />
+		</ActionGroup>
+		<ActionGroup ActionID="use" displayName="Use" baseActionMap="player">
 			<Action ActionMap="player" ActionID="use" />
 			<Action ActionMap="examination" ActionID="use" />
-			<Action ActionMap="world_ui_examination" ActionID="use" />
 		</ActionGroup>
-		<ActionGroup ActionID="specialUse">
+		<Action ActionMap="world_ui_examination" ActionID="use" displayName="World Examination Use"/>
+		<ActionGroup ActionID="specialUse" displayName="Special Use" baseActionMap="player">
 			<Action ActionMap="examination" ActionID="specialUse" />
 			<Action ActionMap="player" ActionID="specialUse" />
 		</ActionGroup>
-		<ActionGroup ActionID="toggle_flashlight">
+		<ActionGroup ActionID="toggle_flashlight" displayName="Toggle Flashlight" baseActionMap="player">
 			<Action ActionMap="mimic_grab" ActionID="toggle_flashlight" />
 			<Action ActionMap="player" ActionID="toggle_flashlight" />
 		</ActionGroup>
-		<ActionGroup ActionID="attack1">
+		<ActionGroup ActionID="attack1" displayName="Attack" baseActionMap="player">
 			<Action ActionMap="mimic_grab" ActionID="attack1" />
 			<Action ActionMap="player" ActionID="attack1" />
 		</ActionGroup>
 
-		<Action ActionMap="player" ActionID="reload" />
-		<Action ActionMap="player" ActionID="nextweapon" />
-		<Action ActionMap="player" ActionID="prevweapon" />
-		<Action ActionMap="player" ActionID="equip_last_weapon" />
+		<Action ActionMap="player" ActionID="reload" displayName="Reload"/>
+		<Action ActionMap="player" ActionID="nextweapon" displayName="Next Weapon"/>
+		<Action ActionMap="player" ActionID="prevweapon" displayName="Previous Weapon"/>
+		<Action ActionMap="player" ActionID="equip_last_weapon" displayName="Equip Last Weapon"/>
 
-		<ActionGroup ActionID="worldui_examine">
+		<ActionGroup ActionID="worldui_examine" baseActionMap="player" displayName="World UI Examine">
 			<Action ActionMap="player" ActionID="worldui_examine" />
 			<Action ActionMap="world_ui_examination" ActionID="worldui_examine" />
 		</ActionGroup>
-		<ActionGroup ActionID="examination_back">
+		<ActionGroup ActionID="examination_back" baseActionMap="world_ui_examination" displayName="Examination Back">
 			<Action ActionMap="examination" ActionID="examination_back" />
 			<Action ActionMap="world_ui_examination" ActionID="examination_back" />
 		</ActionGroup>
-		<Action ActionMap="player" ActionID="nextitem" />
-		<Action ActionMap="player" ActionID="previtem" />
-		<Action ActionMap="player" ActionID="play_audiolog" />
-		<ActionGroup ActionID="viewTutorial">
+		<Action ActionMap="player" ActionID="nextitem" displayName="Next Item"/>
+		<Action ActionMap="player" ActionID="previtem" displayName="Previous Item"/>
+		<Action ActionMap="player" ActionID="play_audiolog" displayName="Play Audio Log"/>
+		<ActionGroup ActionID="viewTutorial" baseActionMap="player" displayName="View Tutorial">
 			<Action ActionMap="examination" ActionID="viewTutorial" />
 			<Action ActionMap="player" ActionID="viewTutorial" />
 			<Action ActionMap="world_ui_examination" ActionID="viewTutorial" />
 		</ActionGroup>
 	</category>
-	<category name="ui">
-		<Action ActionMap="default" ActionID="ui_up" />
-		<Action ActionMap="default" ActionID="ui_down" />
-		<Action ActionMap="default" ActionID="ui_left" />
-		<Action ActionMap="default" ActionID="ui_right" />
-		<Action ActionMap="default" ActionID="ui_click" />
-		<Action ActionMap="default" ActionID="ui_back" />
-		<Action ActionMap="default" ActionID="ui_confirm" />
-		<Action ActionMap="default" ActionID="ui_reset" />
-		<Action ActionMap="default" ActionID="ui_skip_video" />
-		<Action ActionMap="default" ActionID="ui_toggle_pause" />
-		<Action ActionMap="default" ActionID="ui_start_pause" />
-		<Action ActionMap="default" ActionID="quicksave" />
-		<Action ActionMap="default" ActionID="loadLastSave" />
+	<category name="User Interface">
+		<Action ActionMap="default" ActionID="ui_up" displayName="UI Up"/>
+		<Action ActionMap="default" ActionID="ui_down" displayName="UI Down"/>
+		<Action ActionMap="default" ActionID="ui_left" displayName="UI Left"/>
+		<Action ActionMap="default" ActionID="ui_right" displayName="UI Right"/>
+		<Action ActionMap="default" ActionID="ui_click" displayName="UI Click"/>
+		<Action ActionMap="default" ActionID="ui_back" displayName="UI Back"/>
+		<Action ActionMap="default" ActionID="ui_confirm" displayName="UI Confirm"/>
+		<Action ActionMap="default" ActionID="ui_reset" displayName="UI Reset"/>
+		<Action ActionMap="default" ActionID="ui_skip_video" displayName="UI Skip Video"/>
+		<Action ActionMap="default" ActionID="ui_toggle_pause" displayName="UI Toggle Pause"/>
+		<Action ActionMap="default" ActionID="ui_start_pause" displayName="UI Start Pause"/>
+		<Action ActionMap="default" ActionID="quicksave" displayName="Quick Save"/>
+		<Action ActionMap="default" ActionID="loadLastSave" displayName="Quick Load"/>
 	</category>
-	<category name="pda">
-		<Action ActionMap="menu" ActionID="menu_switchtab_right" />
-		<Action ActionMap="menu" ActionID="menu_switchpage_left" />
-		<Action ActionMap="menu" ActionID="menu_switchpage_right" />
-		<Action ActionMap="menu" ActionID="menu_map_center_to_player" />
-		<Action ActionMap="menu" ActionID="menu_show_completed_objectives" />
-		<Action ActionMap="menu" ActionID="menu_external_consume" />
-		<Action ActionMap="menu" ActionID="pdanextpage" />
-		<Action ActionMap="menu" ActionID="pdaprevpage" />
-		<Action ActionMap="menu" ActionID="toggleinventory" />
-		<Action ActionMap="menu" ActionID="toggleobjectives" />
-		<Action ActionMap="menu" ActionID="toggleabilities" />
-		<Action ActionMap="menu" ActionID="togglemap" />
-		<Action ActionMap="menu" ActionID="toggledata" />
-		<Action ActionMap="menu" ActionID="togglestatus" />
-		<Action ActionMap="menu" ActionID="menu_arrow_up" />
-		<Action ActionMap="menu" ActionID="menu_arrow_down" />
-		<Action ActionMap="menu" ActionID="menu_take_stow" />
-		<Action ActionMap="menu" ActionID="menu_take_all" />
-		<Action ActionMap="menu" ActionID="menu_inventory_prev" />
-		<Action ActionMap="menu" ActionID="menu_inventory_next" />
-		<Action ActionMap="menu" ActionID="menu_reset" />
-		<Action ActionMap="menu" ActionID="menu_rotatey" />
-		<Action ActionMap="menu" ActionID="menu_use" />
-		<Action ActionMap="menu" ActionID="menu_examine" />
-		<Action ActionMap="menu" ActionID="autosort" />
-		<Action ActionMap="menu" ActionID="menu_drop" />
-		<Action ActionMap="menu" ActionID="menu_dismantle" />
-		<Action ActionMap="menu" ActionID="menu_qsopen" />
-		<Action ActionMap="menu" ActionID="menu_split" />
-		<Action ActionMap="menu" ActionID="menu_qs_down" />
-		<Action ActionMap="menu" ActionID="menu_qs_left" />
-		<Action ActionMap="menu" ActionID="menu_qs_right" />
-		<Action ActionMap="menu" ActionID="inventory_confirm" />
-		<Action ActionMap="menu" ActionID="menu_stick_up" />
-		<Action ActionMap="menu" ActionID="menu_stick_down" />
-		<Action ActionMap="menu" ActionID="menu_stick_left" />
-		<Action ActionMap="menu" ActionID="menu_stick_right" />
-		<Action ActionMap="menu" ActionID="menu_confirm" />
-		<Action ActionMap="menu" ActionID="menu_back" />
-		<Action ActionMap="menu" ActionID="menu_dialog_cancel" />
-		<Action ActionMap="menu" ActionID="menu_exit" />
-		<Action ActionMap="menu" ActionID="menu_external_exit" />
-		<Action ActionMap="menu" ActionID="menu_xi_start" />
-		<Action ActionMap="menu" ActionID="menu_delete" />
-		<Action ActionMap="menu" ActionID="menu_rotatex" />
-		<Action ActionMap="menu" ActionID="menu_up" />
-		<Action ActionMap="menu" ActionID="menu_down" />
-		<Action ActionMap="menu" ActionID="menu_left" />
-		<Action ActionMap="menu" ActionID="menu_right" />
-		<Action ActionMap="menu" ActionID="menu_map_zoomout" />
-		<Action ActionMap="menu" ActionID="menu_map_zoomin" />
-		<Action ActionMap="menu" ActionID="menu_map_pan_left" />
-		<Action ActionMap="menu" ActionID="menu_map_pan_right" />
-		<Action ActionMap="menu" ActionID="menu_map_pan_up" />
-		<Action ActionMap="menu" ActionID="menu_map_pan_down" />
-		<Action ActionMap="menu" ActionID="menu_map_floor_up" />
-		<Action ActionMap="menu" ActionID="menu_map_floor_down" />
-		<Action ActionMap="menu" ActionID="menu_map_reset_zoom" />
-		<Action ActionMap="menu" ActionID="menu_map_objective" />
-		<Action ActionMap="menu" ActionID="menu_scrollup" />
-		<Action ActionMap="menu" ActionID="menu_scrolldown" />
-		<Action ActionMap="menu" ActionID="xi_menu_scrollup" />
-		<Action ActionMap="menu" ActionID="xi_menu_scrolldown" />
-		<Action ActionMap="menu" ActionID="menu_fcommand1" />
-		<Action ActionMap="menu" ActionID="menu_fcommand2" />
-		<Action ActionMap="menu" ActionID="menu_switchtab_left" />
+	<category name="Transcribe Menus">
+		<Action ActionMap="menu" ActionID="menu_switchtab_right" displayName="Switch Tab Right"/>
+		<Action ActionMap="menu" ActionID="menu_switchtab_left" displayName="Switch Tab Left"/>
+		<Action ActionMap="menu" ActionID="menu_switchpage_right" displayName="Switch Page Right"/>
+		<Action ActionMap="menu" ActionID="menu_switchpage_left" displayName="Switch Page Left"/>
+		<Action ActionMap="menu" ActionID="menu_map_center_to_player" displayName="Center Map to Player"/>
+		<Action ActionMap="menu" ActionID="menu_show_completed_objectives" displayName="Show Completed Objectives"/>
+		<Action ActionMap="menu" ActionID="menu_external_consume" displayName="External Consume"/>
+		<Action ActionMap="menu" ActionID="pdanextpage" displayName="Next Page"/>
+		<Action ActionMap="menu" ActionID="pdaprevpage" displayName="Previous Page"/>
 
-		<ActionGroup ActionID="togglepda">
+		<Action ActionMap="menu" ActionID="menu_arrow_up" displayName="Arrow Up"/>
+		<Action ActionMap="menu" ActionID="menu_arrow_down" displayName="Arrow Down"/>
+		<Action ActionMap="menu" ActionID="menu_take_stow" displayName="Take/Stow"/>
+		<Action ActionMap="menu" ActionID="menu_take_all" displayName="Take All"/>
+		<Action ActionMap="menu" ActionID="menu_inventory_prev" displayName="Inventory Previous"/>
+		<Action ActionMap="menu" ActionID="menu_inventory_next" displayName="Inventory Next"/>
+		<Action ActionMap="menu" ActionID="menu_reset" displayName="Reset"/>
+		<Action ActionMap="menu" ActionID="menu_rotatey" displayName="Rotate Y"/>
+		<Action ActionMap="menu" ActionID="menu_use" displayName="Use"/>
+		<Action ActionMap="menu" ActionID="menu_examine" displayName="Examine"/>
+		<Action ActionMap="menu" ActionID="autosort" displayName="Auto Sort"/>
+		<Action ActionMap="menu" ActionID="menu_drop" displayName="Drop"/>
+		<Action ActionMap="menu" ActionID="menu_dismantle" displayName="Dismantle"/>
+		<Action ActionMap="menu" ActionID="menu_qsopen" displayName="Quick Slot Open"/>
+		<Action ActionMap="menu" ActionID="menu_split" displayName="Split"/>
+		<Action ActionMap="menu" ActionID="menu_qs_down" displayName="Quick Slot Down"/>
+		<Action ActionMap="menu" ActionID="menu_qs_left" displayName="Quick Slot Left"/>
+		<Action ActionMap="menu" ActionID="menu_qs_right" displayName="Quick Slot Right"/>
+		<Action ActionMap="menu" ActionID="inventory_confirm" displayName="Inventory Confirm"/>
+		<Action ActionMap="menu" ActionID="menu_stick_up" displayName="Stick Up"/>
+		<Action ActionMap="menu" ActionID="menu_stick_down" displayName="Stick Down"/>
+		<Action ActionMap="menu" ActionID="menu_stick_left" displayName="Stick Left"/>
+		<Action ActionMap="menu" ActionID="menu_stick_right" displayName="Stick Right"/>
+		<Action ActionMap="menu" ActionID="menu_confirm" displayName="Confirm"/>
+		<Action ActionMap="menu" ActionID="menu_back" displayName="Back"/>
+		<Action ActionMap="menu" ActionID="menu_dialog_cancel" displayName="Dialog Cancel"/>
+		<Action ActionMap="menu" ActionID="menu_exit" displayName="Exit"/>
+		<Action ActionMap="menu" ActionID="menu_external_exit" displayName="External Exit"/>
+		<Action ActionMap="menu" ActionID="menu_xi_start" displayName="Xi Start"/>
+		<Action ActionMap="menu" ActionID="menu_delete" displayName="Delete"/>
+		<Action ActionMap="menu" ActionID="menu_rotatex" displayName="Rotate X"/>
+		<Action ActionMap="menu" ActionID="menu_up" displayName="Up"/>
+		<Action ActionMap="menu" ActionID="menu_down" displayName="Down"/>
+		<Action ActionMap="menu" ActionID="menu_left" displayName="Left"/>
+		<Action ActionMap="menu" ActionID="menu_right" displayName="Right"/>
+		<Action ActionMap="menu" ActionID="menu_map_zoomout" displayName="Map Zoom Out"/>
+		<Action ActionMap="menu" ActionID="menu_map_zoomin" displayName="Map Zoom In"/>
+		<Action ActionMap="menu" ActionID="menu_map_pan_left" displayName="Map Pan Left"/>
+		<Action ActionMap="menu" ActionID="menu_map_pan_right" displayName="Map Pan Right"/>
+		<Action ActionMap="menu" ActionID="menu_map_pan_up" displayName="Map Pan Up"/>
+		<Action ActionMap="menu" ActionID="menu_map_pan_down" displayName="Map Pan Down"/>
+		<Action ActionMap="menu" ActionID="menu_map_floor_up" displayName="Map Floor Up"/>
+		<Action ActionMap="menu" ActionID="menu_map_floor_down" displayName="Map Floor Down"/>
+		<Action ActionMap="menu" ActionID="menu_map_reset_zoom" displayName="Map Reset Zoom"/>
+		<Action ActionMap="menu" ActionID="menu_map_objective" displayName="Map Objective"/>
+		<Action ActionMap="menu" ActionID="menu_scrollup" displayName="Scroll Up"/>
+		<Action ActionMap="menu" ActionID="menu_scrolldown" displayName="Scroll Down"/>
+		<Action ActionMap="menu" ActionID="xi_menu_scrollup" displayName="Controller Menu Scroll Up"/>
+		<Action ActionMap="menu" ActionID="xi_menu_scrolldown" displayName="Controller Menu Scroll Down"/>
+		<Action ActionMap="menu" ActionID="menu_fcommand1" displayName="FCommand1"/>
+		<Action ActionMap="menu" ActionID="menu_fcommand2" displayName="FCommand2"/>
+
+		<ActionGroup ActionID="togglepda" baseActionMap="player" displayName="Toggle PDA">
 			<Action ActionMap="player" ActionID="togglepda" />
 			<Action ActionMap="mimic_grab" ActionID="togglepda" />
 			<Action ActionMap="psi_scanning_fanfare" ActionID="togglepda" />
 			<Action ActionMap="world_ui_examination" ActionID="togglepda" />
+			<Action ActionMap="menu" ActionID="togglepda" />
 		</ActionGroup>
-		<ActionGroup ActionID="toggleinventory">
+		<ActionGroup ActionID="toggleinventory" baseActionMap="player" displayName="Toggle Inventory">
 			<Action ActionMap="player" ActionID="toggleinventory" />
 			<Action ActionMap="mimic_grab" ActionID="toggleinventory" />
 			<Action ActionMap="world_ui_examination" ActionID="toggleinventory" />
+			<Action ActionMap="menu" ActionID="toggleinventory" />
 		</ActionGroup>
-		<ActionGroup ActionID="toggleobjectives">
+		<ActionGroup ActionID="toggleobjectives" baseActionMap="player" displayName="Toggle Objectives">
 			<Action ActionMap="mimic_grab" ActionID="toggleobjectives" />
 			<Action ActionMap="player" ActionID="toggleobjectives" />
 			<Action ActionMap="world_ui_examination" ActionID="toggleobjectives" />
+			<Action ActionMap="menu" ActionID="toggleobjectives" />
 		</ActionGroup>
-		<ActionGroup ActionID="toggleabilities">
+		<ActionGroup ActionID="toggleabilities" baseActionMap="player" displayName="Toggle Abilities">
 			<Action ActionMap="mimic_grab" ActionID="toggleabilities" />
 			<Action ActionMap="world_ui_examination" ActionID="toggleabilities" />
 			<Action ActionMap="psi_scanning_fanfare" ActionID="toggleabilities" />
 			<Action ActionMap="player" ActionID="toggleabilities" />
+			<Action ActionMap="menu" ActionID="toggleabilities" />
 		</ActionGroup>
-		<ActionGroup ActionID="togglemap">
+		<ActionGroup ActionID="togglemap" baseActionMap="player" displayName="Toggle Map">
 			<Action ActionMap="mimic_grab" ActionID="togglemap" />
 			<Action ActionMap="player" ActionID="togglemap" />
 			<Action ActionMap="world_ui_examination" ActionID="togglemap" />
+			<Action ActionMap="menu" ActionID="togglemap" />
 		</ActionGroup>
-		<ActionGroup ActionID="toggledata">
+		<ActionGroup ActionID="toggledata" baseActionMap="player" displayName="Toggle Data">
 			<Action ActionMap="mimic_grab" ActionID="toggledata" />
 			<Action ActionMap="player" ActionID="toggledata" />
 			<Action ActionMap="world_ui_examination" ActionID="toggledata" />
+			<Action ActionMap="menu" ActionID="toggledata" />
 		</ActionGroup>
-		<ActionGroup ActionID="togglestatus">
+		<ActionGroup ActionID="togglestatus" baseActionMap="player" displayName="Toggle Status">
 			<Action ActionMap="mimic_grab" ActionID="togglestatus" />
 			<Action ActionMap="player" ActionID="togglestatus" />
 			<Action ActionMap="world_ui_examination" ActionID="togglestatus" />
+			<Action ActionMap="menu" ActionID="togglestatus" />
 		</ActionGroup>
 	</category>
-	<category name="hotbar">
-		<ActionGroup ActionID="numkey0">
+	<category name="Hotbar">
+		<ActionGroup ActionID="numkey0" baseActionMap="player" displayName="Numkey 0">
 			<Action ActionMap="player" ActionID="numkey0" />
 			<Action ActionMap="focusmode" ActionID="numkey0" />
 			<Action ActionMap="menu" ActionID="numkey0" />
 		</ActionGroup>
-		<ActionGroup ActionID="numkey1">
+		<ActionGroup ActionID="numkey1" baseActionMap="player" displayName="Numkey 1">
 			<Action ActionMap="player" ActionID="numkey1" />
 			<Action ActionMap="focusmode" ActionID="numkey1" />
 			<Action ActionMap="menu" ActionID="numkey1" />
 		</ActionGroup>
-		<ActionGroup ActionID="numkey2">
+		<ActionGroup ActionID="numkey2" baseActionMap="player" displayName="Numkey 2">
 			<Action ActionMap="player" ActionID="numkey2" />
 			<Action ActionMap="focusmode" ActionID="numkey2" />
 			<Action ActionMap="menu" ActionID="numkey2" />
 		</ActionGroup>
-		<ActionGroup ActionID="numkey3">
+		<ActionGroup ActionID="numkey3" baseActionMap="player" displayName="Numkey 3">
 			<Action ActionMap="player" ActionID="numkey3" />
 			<Action ActionMap="focusmode" ActionID="numkey3" />
 			<Action ActionMap="menu" ActionID="numkey3" />
 		</ActionGroup>
-		<ActionGroup ActionID="numkey4">
+		<ActionGroup ActionID="numkey4" baseActionMap="player" displayName="Numkey 4">
 			<Action ActionMap="player" ActionID="numkey4" />
 			<Action ActionMap="focusmode" ActionID="numkey4" />
 			<Action ActionMap="menu" ActionID="numkey4" />
 		</ActionGroup>
-		<ActionGroup ActionID="numkey5">
+		<ActionGroup ActionID="numkey5" baseActionMap="player" displayName="Numkey 5">
 			<Action ActionMap="player" ActionID="numkey5" />
 			<Action ActionMap="focusmode" ActionID="numkey5" />
 			<Action ActionMap="menu" ActionID="numkey5" />
 		</ActionGroup>
-		<ActionGroup ActionID="numkey6">
+		<ActionGroup ActionID="numkey6" baseActionMap="player" displayName="Numkey 6">
 			<Action ActionMap="player" ActionID="numkey6" />
 			<Action ActionMap="focusmode" ActionID="numkey6" />
 			<Action ActionMap="menu" ActionID="numkey6" />
 		</ActionGroup>
-		<ActionGroup ActionID="numkey7">
+		<ActionGroup ActionID="numkey7" baseActionMap="player" displayName="Numkey 7">
 			<Action ActionMap="player" ActionID="numkey7" />
 			<Action ActionMap="focusmode" ActionID="numkey7" />
 			<Action ActionMap="menu" ActionID="numkey7" />
 		</ActionGroup>
-		<ActionGroup ActionID="numkey8">
+		<ActionGroup ActionID="numkey8" baseActionMap="player" displayName="Numkey 8">
 			<Action ActionMap="player" ActionID="numkey8" />
 			<Action ActionMap="menu" ActionID="numkey8" />
 			<Action ActionMap="focusmode" ActionID="numkey8" />
 		</ActionGroup>
-		<ActionGroup ActionID="numkey9">
+		<ActionGroup ActionID="numkey9" baseActionMap="player" displayName="Numkey 9">
 			<Action ActionMap="player" ActionID="numkey9" />
 			<Action ActionMap="focusmode" ActionID="numkey9" />
 			<Action ActionMap="menu" ActionID="numkey9" />
 		</ActionGroup>
 	</category>
-	<category name="psychoscope">
-		<Action ActionMap="player" ActionID="toggle_scope" />
-		<Action ActionMap="psi_scanning_fanfare" ActionID="toggle_scope" />
-		<Action ActionMap="player" ActionID="zoom_in" />
-		<Action ActionMap="player" ActionID="zoom_out" />
-		<Action ActionMap="psi_scanning_fanfare" ActionID="scanner_exit_fanfare" />
-		<Action ActionMap="player" ActionID="scanner_lock_target" />
+	<category name="Psychoscope">
+		<ActionGroup ActionID="toggle_scope" baseActionMap="player" displayName="Toggle Scope">
+			<Action ActionMap="player" ActionID="toggle_scope" />
+			<Action ActionMap="psi_scanning_fanfare" ActionID="toggle_scope" />
+		</ActionGroup>
+		<Action ActionMap="player" ActionID="zoom_in" displayName="Zoom In" />
+		<Action ActionMap="player" ActionID="zoom_out" displayName="Zoom Out" />
+		<Action ActionMap="psi_scanning_fanfare" ActionID="scanner_exit_fanfare" displayName="Exit Scanner" />
+		<Action ActionMap="player" ActionID="scanner_lock_target" displayName="Lock Target" />
 	</category>
-	<category name="looting">
-		<ActionGroup ActionID="loot_navdown">
-			<Action ActionMap="examination" ActionID="loot_navdown" />
-			<Action ActionMap="player" ActionID="loot_navdown" />
-		</ActionGroup>
-		<ActionGroup ActionID="loot_navright">
-			<Action ActionMap="examination" ActionID="loot_navright" />
-			<Action ActionMap="player" ActionID="loot_navright" />
-		</ActionGroup>
-		<ActionGroup ActionID="loot_navleft">
-			<Action ActionMap="examination" ActionID="loot_navleft" />
-			<Action ActionMap="player" ActionID="loot_navleft" />
-		</ActionGroup>
-		<ActionGroup ActionID="loot_search">
-			<Action ActionMap="examination" ActionID="loot_search" />
-			<Action ActionMap="player" ActionID="loot_search" />
-		</ActionGroup>
-		<ActionGroup ActionID="loot_scroll_up">
-			<Action ActionMap="examination" ActionID="loot_scroll_up" />
-			<Action ActionMap="player" ActionID="loot_scroll_up" />
-		</ActionGroup>
-		<ActionGroup ActionID="loot_scroll_down">
-			<Action ActionMap="examination" ActionID="loot_scroll_down" />
-			<Action ActionMap="player" ActionID="loot_scroll_down" />
-		</ActionGroup>
-		<ActionGroup ActionID="loot_navup">
+	<category name="Looting">
+		<ActionGroup ActionID="loot_navup" baseActionMap="player" displayName="Loot Nav Up">
 			<Action ActionMap="examination" ActionID="loot_navup" />
 			<Action ActionMap="player" ActionID="loot_navup" />
 		</ActionGroup>
+		<ActionGroup ActionID="loot_navdown" baseActionMap="player" displayName="Loot Nav Down">
+			<Action ActionMap="examination" ActionID="loot_navdown" />
+			<Action ActionMap="player" ActionID="loot_navdown" />
+		</ActionGroup>
+		<ActionGroup ActionID="loot_navright" baseActionMap="player" displayName="Loot Nav Right">
+			<Action ActionMap="examination" ActionID="loot_navright" />
+			<Action ActionMap="player" ActionID="loot_navright" />
+		</ActionGroup>
+		<ActionGroup ActionID="loot_navleft" baseActionMap="player" displayName="Loot Nav Left">
+			<Action ActionMap="examination" ActionID="loot_navleft" />
+			<Action ActionMap="player" ActionID="loot_navleft" />
+		</ActionGroup>
+		<ActionGroup ActionID="loot_search" baseActionMap="player" displayName="Loot Search">
+			<Action ActionMap="examination" ActionID="loot_search" />
+			<Action ActionMap="player" ActionID="loot_search" />
+		</ActionGroup>
+		<ActionGroup ActionID="loot_scroll_up" baseActionMap="player" displayName="Loot Scroll Up">
+			<Action ActionMap="examination" ActionID="loot_scroll_up" />
+			<Action ActionMap="player" ActionID="loot_scroll_up" />
+		</ActionGroup>
+		<ActionGroup ActionID="loot_scroll_down" baseActionMap="player" displayName="Loot Scroll Down">
+			<Action ActionMap="examination" ActionID="loot_scroll_down" />
+			<Action ActionMap="player" ActionID="loot_scroll_down" />
+		</ActionGroup>
 	</category>
-	<category name="quickselect">
-		<Action ActionMap="player" ActionID="favorites_confirm" />
-		<Action ActionMap="player" ActionID="favorites_cancel" />
-		<ActionGroup ActionID="quickselect_left">
+	<category name="Quick-Select">
+		<Action ActionMap="player" ActionID="favorites_confirm" displayName="Favorites Confirm" />
+		<Action ActionMap="player" ActionID="favorites_cancel" displayName="Favorites Cancel" />
+		<ActionGroup ActionID="quickselect_left" baseActionMap="player" displayName="Quick-Select Left">
 			<Action ActionMap="player" ActionID="quickselect_left" />
 			<Action ActionMap="focusmode" ActionID="quickselect_left" />
 		</ActionGroup>
-		<ActionGroup ActionID="quickselect_right">
+		<ActionGroup ActionID="quickselect_right" baseActionMap="player" displayName="Quick-Select Right">
 			<Action ActionMap="player" ActionID="quickselect_right" />
 			<Action ActionMap="focusmode" ActionID="quickselect_right" />
 		</ActionGroup>
-		<ActionGroup ActionID="quickselect_down">
+		<ActionGroup ActionID="quickselect_down" baseActionMap="player" displayName="Quick-Select Down">
 			<Action ActionMap="player" ActionID="quickselect_down" />
 			<Action ActionMap="focusmode" ActionID="quickselect_down" />
 		</ActionGroup>
 	</category>
-	<category name="keypad">
-		<ActionGroup ActionID="keypad0">
+	<category name="Keypad">
+		<ActionGroup ActionID="keypad0" baseActionMap="player" displayName="Keypad 0">
 			<Action ActionMap="player" ActionID="keypad0" />
 			<Action ActionMap="world_ui_examination" ActionID="keypad0" />
 		</ActionGroup>
-		<ActionGroup ActionID="keypad1">
+		<ActionGroup ActionID="keypad1" baseActionMap="player" displayName="Keypad 1">
 			<Action ActionMap="player" ActionID="keypad1" />
 			<Action ActionMap="world_ui_examination" ActionID="keypad1" />
 		</ActionGroup>
-		<ActionGroup ActionID="keypad2">
+		<ActionGroup ActionID="keypad2" baseActionMap="player" displayName="Keypad 2">
 			<Action ActionMap="player" ActionID="keypad2" />
 			<Action ActionMap="world_ui_examination" ActionID="keypad2" />
 		</ActionGroup>
-		<ActionGroup ActionID="keypad3">
+		<ActionGroup ActionID="keypad3" baseActionMap="player" displayName="Keypad 3">
 			<Action ActionMap="player" ActionID="keypad3" />
 			<Action ActionMap="world_ui_examination" ActionID="keypad3" />
 		</ActionGroup>
-		<ActionGroup ActionID="keypad4">
+		<ActionGroup ActionID="keypad4" baseActionMap="player" displayName="Keypad 4">
 			<Action ActionMap="player" ActionID="keypad4" />
 			<Action ActionMap="world_ui_examination" ActionID="keypad4" />
 		</ActionGroup>
-		<ActionGroup ActionID="keypad5">
+		<ActionGroup ActionID="keypad5" baseActionMap="player" displayName="Keypad 5">
 			<Action ActionMap="player" ActionID="keypad5" />
 			<Action ActionMap="world_ui_examination" ActionID="keypad5" />
 		</ActionGroup>
-		<ActionGroup ActionID="keypad6">
+		<ActionGroup ActionID="keypad6" baseActionMap="player" displayName="Keypad 6">
 			<Action ActionMap="player" ActionID="keypad6" />
 			<Action ActionMap="world_ui_examination" ActionID="keypad6" />
 		</ActionGroup>
-		<ActionGroup ActionID="keypad7">
+		<ActionGroup ActionID="keypad7" baseActionMap="player" displayName="Keypad 7">
 			<Action ActionMap="player" ActionID="keypad7" />
 			<Action ActionMap="world_ui_examination" ActionID="keypad7" />
 		</ActionGroup>
-		<ActionGroup ActionID="keypad8">
+		<ActionGroup ActionID="keypad8" baseActionMap="player" displayName="Keypad 8">
 			<Action ActionMap="player" ActionID="keypad8" />
 			<Action ActionMap="world_ui_examination" ActionID="keypad8" />
 		</ActionGroup>
-		<ActionGroup ActionID="keypad9">
+		<ActionGroup ActionID="keypad9" baseActionMap="player" displayName="Keypad 9">
 			<Action ActionMap="player" ActionID="keypad9" />
 			<Action ActionMap="world_ui_examination" ActionID="keypad9" />
 		</ActionGroup>
-		<ActionGroup ActionID="backspace">
+		<ActionGroup ActionID="backspace" baseActionMap="player" displayName="Backspace">
 			<Action ActionMap="player" ActionID="backspace" />
 			<Action ActionMap="world_ui_examination" ActionID="backspace" />
 		</ActionGroup>
 	</category>
-	<category name="look">
+	<category name="Look">
 		<!-- keyboard/mouse -->
-		<ActionGroup ActionID="rotateyaw">
+		<ActionGroup ActionID="rotateyaw" baseActionMap="player" displayName="Rotate Yaw">
 			<Action ActionMap="etherDuplicate" ActionID="rotateyaw" />
 			<Action ActionMap="examination" ActionID="rotateyaw" />
 			<Action ActionMap="focusmode" ActionID="rotateyaw" />
@@ -385,7 +390,7 @@
 			<Action ActionMap="player" ActionID="rotateyaw" />
 			<Action ActionMap="world_ui_examination" ActionID="rotateyaw" />
 		</ActionGroup>
-		<ActionGroup ActionID="rotatepitch">
+		<ActionGroup ActionID="rotatepitch" baseActionMap="player" displayName="Rotate Pitch">
 			<Action ActionMap="etherDuplicate" ActionID="rotatepitch" />
 			<Action ActionMap="examination" ActionID="rotatepitch" />
 			<Action ActionMap="focusmode" ActionID="rotatepitch" />
@@ -395,7 +400,7 @@
 		</ActionGroup>
 
 		<!-- controller -->
-		<ActionGroup ActionID="xi_rotateyaw">
+		<ActionGroup ActionID="xi_rotateyaw" baseActionMap="player" displayName="Controller Rotate Yaw">
 			<Action ActionMap="etherDuplicate" ActionID="xi_rotateyaw" />
 			<Action ActionMap="examination" ActionID="xi_rotateyaw" />
 			<Action ActionMap="focusmode" ActionID="xi_rotateyaw" />
@@ -403,7 +408,7 @@
 			<Action ActionMap="player" ActionID="xi_rotateyaw" />
 			<Action ActionMap="world_ui_examination" ActionID="xi_rotateyaw" />
 		</ActionGroup>
-		<ActionGroup ActionID="xi_rotatepitch">
+		<ActionGroup ActionID="xi_rotatepitch" baseActionMap="player" displayName="Controller Rotate Pitch">
 			<Action ActionMap="etherDuplicate" ActionID="xi_rotatepitch" />
 			<Action ActionMap="examination" ActionID="xi_rotatepitch" />
 			<Action ActionMap="focusmode" ActionID="xi_rotatepitch" />
@@ -412,93 +417,93 @@
 			<Action ActionMap="world_ui_examination" ActionID="xi_rotatepitch" />
 		</ActionGroup>
 		<!-- ui examine cursor controller only -->
-		<Action ActionMap="world_ui_examination" ActionID="xi_reticle_movex" />
-		<Action ActionMap="world_ui_examination" ActionID="xi_reticle_movey" />
-		<Action ActionMap="world_ui_examination" ActionID="xi_recenter_worldui" />
+		<Action ActionMap="world_ui_examination" ActionID="xi_reticle_movex" displayName="Controller UI Examine Cursor Move X"/>
+		<Action ActionMap="world_ui_examination" ActionID="xi_reticle_movey" displayName="Controller UI Examine Cursor Move Y"/>
+		<Action ActionMap="world_ui_examination" ActionID="xi_recenter_worldui" displayName="Controller UI Examine Cursor Recenter"/>
 	</category>
-	<category name="hacking">
-		<Action ActionMap="hacking" ActionID="hack_final1" />
-		<Action ActionMap="hacking" ActionID="hack_final2" />
-		<Action ActionMap="hacking" ActionID="hack_final3" />
-		<Action ActionMap="hacking" ActionID="hack_final4" />
-		<Action ActionMap="hacking" ActionID="hack_moveprompt_y" />
-		<Action ActionMap="hacking" ActionID="hack_moveprompt_x" />
-		<Action ActionMap="hacking" ActionID="hack_moveleft" />
-		<Action ActionMap="hacking" ActionID="hack_moveright" />
-		<Action ActionMap="hacking" ActionID="hack_moveup" />
-		<Action ActionMap="hacking" ActionID="hack_movedown" />
+	<category name="Hacking">
+		<Action ActionMap="hacking" ActionID="hack_final1" displayName="Hack Final Key 1"/>
+		<Action ActionMap="hacking" ActionID="hack_final2" displayName="Hack Final Key 2"/>
+		<Action ActionMap="hacking" ActionID="hack_final3" displayName="Hack Final Key 3"/>
+		<Action ActionMap="hacking" ActionID="hack_final4" displayName="Hack Final Key 4"/>
+		<Action ActionMap="hacking" ActionID="hack_moveprompt_y" displayName="Hack Move Prompt Y"/>
+		<Action ActionMap="hacking" ActionID="hack_moveprompt_x" displayName="Hack Move Prompt X"/>
+		<Action ActionMap="hacking" ActionID="hack_moveleft" displayName="Hack Move Left"/>
+		<Action ActionMap="hacking" ActionID="hack_moveright" displayName="Hack Move Right"/>
+		<Action ActionMap="hacking" ActionID="hack_moveup" displayName="Hack Move Up"/>
+		<Action ActionMap="hacking" ActionID="hack_movedown" displayName="Hack Move Down"/>
 	</category>
 	<category name="focusmode">
-		<Action ActionMap="focusmode" ActionID="mouse_execute_power_type1" />
-		<Action ActionMap="focusmode" ActionID="mouse_execute_power_type2" />
-		<Action ActionMap="focusmode" ActionID="controller_execute_power" />
-		<Action ActionMap="focusmode" ActionID="mouse_cancel_focusmode_type1" />
-		<Action ActionMap="focusmode" ActionID="mouse_cancel_focusmode_type2" />
-		<Action ActionMap="focusmode" ActionID="controller_cancel_focusmode" />
-		<Action ActionMap="focusmode" ActionID="controller_cancel_psitargeting" />
-		<Action ActionMap="focusmode" ActionID="controller_select_item" />
-		<Action ActionMap="focusmode" ActionID="mouse_cancel_select_item" />
-		<Action ActionMap="focusmode" ActionID="mouse_menu_rotate_yaw" />
-		<Action ActionMap="focusmode" ActionID="mouse_menu_rotate_pitch" />
-		<Action ActionMap="focusmode" ActionID="controller_left_menu_rotate_yaw" />
-		<Action ActionMap="focusmode" ActionID="controller_left_menu_rotate_pitch" />
-		<Action ActionMap="focusmode" ActionID="controller_right_menu_rotate_yaw" />
-		<Action ActionMap="focusmode" ActionID="controller_right_menu_rotate_pitch" />
-		<Action ActionMap="focusmode" ActionID="use_food_item" />
-		<Action ActionMap="focusmode" ActionID="use_armor_item" />
-		<Action ActionMap="focusmode" ActionID="mouse_select_item" />
-		<Action ActionMap="focusmode" ActionID="menu_rotate_up" />
-		<Action ActionMap="focusmode" ActionID="menu_rotate_down" />
-		<Action ActionMap="focusmode" ActionID="target_rotate_yaw" />
-		<Action ActionMap="focusmode" ActionID="target_rotate_pitch" />
-		<Action ActionMap="focusmode" ActionID="use_psi_item" />
-		<Action ActionMap="focusmode" ActionID="use_healing_item" />
+		<Action ActionMap="focusmode" ActionID="mouse_execute_power_type1" displayName="Mouse Execute Power Type 1"/>
+		<Action ActionMap="focusmode" ActionID="mouse_execute_power_type2" displayName="Mouse Execute Power Type 2"/>
+		<Action ActionMap="focusmode" ActionID="controller_execute_power" displayName="Controller Execute Power"/>
+		<Action ActionMap="focusmode" ActionID="mouse_cancel_focusmode_type1" displayName="Mouse Cancel Focus Mode Type 1"/>
+		<Action ActionMap="focusmode" ActionID="mouse_cancel_focusmode_type2" displayName="Mouse Cancel Focus Mode Type 2"/>
+		<Action ActionMap="focusmode" ActionID="controller_cancel_focusmode" displayName="Controller Cancel Focus Mode"/>
+		<Action ActionMap="focusmode" ActionID="controller_cancel_psitargeting" displayName="Controller Cancel Psi Targeting"/>
+		<Action ActionMap="focusmode" ActionID="controller_select_item" displayName="Controller Select Item"/>
+		<Action ActionMap="focusmode" ActionID="mouse_cancel_select_item" displayName="Mouse Cancel Select Item"/>
+		<Action ActionMap="focusmode" ActionID="mouse_menu_rotate_yaw" displayName="Mouse Menu Rotate Yaw"/>
+		<Action ActionMap="focusmode" ActionID="mouse_menu_rotate_pitch" displayName="Mouse Menu Rotate Pitch"/>
+		<Action ActionMap="focusmode" ActionID="controller_left_menu_rotate_yaw" displayName="Controller Left Menu Rotate Yaw"/>
+		<Action ActionMap="focusmode" ActionID="controller_left_menu_rotate_pitch" displayName="Controller Left Menu Rotate Pitch"/>
+		<Action ActionMap="focusmode" ActionID="controller_right_menu_rotate_yaw" displayName="Controller Right Menu Rotate Yaw"/>
+		<Action ActionMap="focusmode" ActionID="controller_right_menu_rotate_pitch" displayName="Controller Right Menu Rotate Pitch"/>
+		<Action ActionMap="focusmode" ActionID="use_food_item" displayName="Use Food Item"/>
+		<Action ActionMap="focusmode" ActionID="use_armor_item" displayName="Use Armor Item"/>
+		<Action ActionMap="focusmode" ActionID="mouse_select_item" displayName="Mouse Select Item"/>
+		<Action ActionMap="focusmode" ActionID="menu_rotate_up" displayName="Menu Rotate Up"/>
+		<Action ActionMap="focusmode" ActionID="menu_rotate_down" displayName="Menu Rotate Down"/>
+		<Action ActionMap="focusmode" ActionID="target_rotate_yaw" displayName="Target Rotate Yaw"/>
+		<Action ActionMap="focusmode" ActionID="target_rotate_pitch" displayName="Target Rotate Pitch"/>
+		<Action ActionMap="focusmode" ActionID="use_psi_item" displayName="Use Psi Item"/>
+		<Action ActionMap="focusmode" ActionID="use_healing_item" displayName="Use Healing Item"/>
 
-		<Action ActionMap="player" ActionID="mouse_enter_focusmode" />
-		<Action ActionMap="player" ActionID="enter_focusmode" />
+		<Action ActionMap="player" ActionID="mouse_enter_focusmode" displayName="Mouse Enter Focus Mode"/>
+		<Action ActionMap="player" ActionID="enter_focusmode" displayName="Enter Focus Mode"/>
 	</category>
 	<category name="debug">
-		<Action ActionMap="debug" ActionID="increasetimedilation" />
-		<Action ActionMap="debug" ActionID="decreasetimedilation" />
-		<Action ActionMap="debug" ActionID="togglearkprofile" />
-		<Action ActionMap="debug" ActionID="editor_pause" />
-		<Action ActionMap="debug" ActionID="reportbug" />
-		<Action ActionMap="debug" ActionID="openlog" />
-		<Action ActionMap="debug" ActionID="normaltimedilation" />
-		<Action ActionMap="debug" ActionID="ui_toggle_debug" />
-		<Action ActionMap="debug" ActionID="thirdperson" />
-		<Action ActionMap="debug" ActionID="debug" />
-		<Action ActionMap="debug" ActionID="flymode" />
-		<Action ActionMap="debug" ActionID="togglepdrawhelpers" />
+		<Action ActionMap="debug" ActionID="increasetimedilation" displayName="Increase Time Dilation"/>
+		<Action ActionMap="debug" ActionID="decreasetimedilation" displayName="Decrease Time Dilation"/>
+		<Action ActionMap="debug" ActionID="togglearkprofile" displayName="Toggle Ark Profile"/>
+		<Action ActionMap="debug" ActionID="editor_pause" displayName="Editor Pause"/>
+		<Action ActionMap="debug" ActionID="reportbug" displayName="Report Bug"/>
+		<Action ActionMap="debug" ActionID="openlog" displayName="Open Log"/>
+		<Action ActionMap="debug" ActionID="normaltimedilation" displayName="Normal Time Dilation"/>
+		<Action ActionMap="debug" ActionID="ui_toggle_debug" displayName="UI Toggle Debug"/>
+		<Action ActionMap="debug" ActionID="thirdperson" displayName="Third Person"/>
+		<Action ActionMap="debug" ActionID="debug" displayName="Debug"/>
+		<Action ActionMap="debug" ActionID="flymode" displayName="Fly Mode"/>
+		<Action ActionMap="debug" ActionID="togglepdrawhelpers" displayName="Toggle PDraw Helpers"/>
 	</category>
 	<category name="flycam">
-		<Action ActionMap="flycam" ActionID="flycam_movex" />
-		<Action ActionMap="flycam" ActionID="flycam_movey" />
-		<Action ActionMap="flycam" ActionID="flycam_moveup" />
-		<Action ActionMap="flycam" ActionID="flycam_movedown" />
-		<Action ActionMap="flycam" ActionID="flycam_speedup" />
-		<Action ActionMap="flycam" ActionID="flycam_speeddown" />
-		<Action ActionMap="flycam" ActionID="flycam_turbo" />
-		<Action ActionMap="flycam" ActionID="flycam_rotateyaw" />
-		<Action ActionMap="flycam" ActionID="flycam_rotatepitch" />
-		<Action ActionMap="flycam" ActionID="flycam_setpoint" />
-		<Action ActionMap="flycam" ActionID="flycam_play" />
-		<Action ActionMap="flycam" ActionID="flycam_clear" />
-		<Action ActionMap="player" ActionID="flycam_moveup" />
-		<Action ActionMap="player" ActionID="flycam_movedown" />
+		<Action ActionMap="flycam" ActionID="flycam_movex" displayName="Flycam Move X"/>
+		<Action ActionMap="flycam" ActionID="flycam_movey" displayName="Flycam Move Y"/>
+		<Action ActionMap="flycam" ActionID="flycam_moveup" displayName="Flycam Move Up"/>
+		<Action ActionMap="flycam" ActionID="flycam_movedown" displayName="Flycam Move Down"/>
+		<Action ActionMap="flycam" ActionID="flycam_speedup" displayName="Flycam Speed Up"/>
+		<Action ActionMap="flycam" ActionID="flycam_speeddown" displayName="Flycam Speed Down"/>
+		<Action ActionMap="flycam" ActionID="flycam_turbo" displayName="Flycam Turbo"/>
+		<Action ActionMap="flycam" ActionID="flycam_rotateyaw" displayName="Flycam Rotate Yaw"/>
+		<Action ActionMap="flycam" ActionID="flycam_rotatepitch" displayName="Flycam Rotate Pitch"/>
+		<Action ActionMap="flycam" ActionID="flycam_setpoint" displayName="Flycam Set Point"/>
+		<Action ActionMap="flycam" ActionID="flycam_play" displayName="Flycam Play"/>
+		<Action ActionMap="flycam" ActionID="flycam_clear" displayName="Flycam Clear"/>
+		<Action ActionMap="player" ActionID="flycam_moveup" displayName="Flycam Move Up"/>
+		<Action ActionMap="player" ActionID="flycam_movedown" displayName="Flycam Move Down"/>
 	</category>
 	<category name="unknown">
-		<Action ActionMap="mimic_grab" ActionID="rotaterollleft" />
-		<Action ActionMap="mimic_grab" ActionID="rotaterollright" />
-		<Action ActionMap="mimic_grab" ActionID="prone" />
-		<Action ActionMap="etherDuplicate" ActionID="start_ether_duplicate" />
-		<Action ActionMap="player" ActionID="select_equipped_power" />
-		<Action ActionMap="mimic_grab" ActionID="instakill" />
-		<Action ActionMap="player" ActionID="instakill" />
-		<Action ActionMap="mimic_grab" ActionID="respawn" />
-		<Action ActionMap="player" ActionID="respawn" />
-		<Action ActionMap="player" ActionID="fire_turret" />
-		<Action ActionMap="player" ActionID="mimic_swap_camera" />
-		<Action ActionMap="player" ActionID="toggle_weapon" />
+		<Action ActionMap="mimic_grab" ActionID="rotaterollleft" displayName="Rotate Roll Left"/>
+		<Action ActionMap="mimic_grab" ActionID="rotaterollright" displayName="Rotate Roll Right"/>
+		<Action ActionMap="mimic_grab" ActionID="prone" displayName="Prone"/>
+		<Action ActionMap="etherDuplicate" ActionID="start_ether_duplicate" displayName="Start Ether Duplicate"/>
+		<Action ActionMap="player" ActionID="select_equipped_power" displayName="Select Equipped Power"/>
+		<Action ActionMap="mimic_grab" ActionID="instakill" displayName="Instakill"/>
+		<Action ActionMap="player" ActionID="instakill" displayName="Instakill"/>
+		<Action ActionMap="mimic_grab" ActionID="respawn" displayName="Respawn"/>
+		<Action ActionMap="player" ActionID="respawn" displayName="Respawn"/>
+		<Action ActionMap="player" ActionID="fire_turret" displayName="Fire Turret"/>
+		<Action ActionMap="player" ActionID="mimic_swap_camera" displayName="Mimic Swap Camera"/>
+		<Action ActionMap="player" ActionID="toggle_weapon" displayName="Toggle Weapon"/>
 	</category>
 </ActionMaps>

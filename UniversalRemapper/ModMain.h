@@ -2,6 +2,7 @@
 #include <ChairLoader/ModSDK/ChairloaderModBase.h>
 
 class SActionInput;
+class CActionMapAction;
 
 class ModMain : public ChairloaderModBase
 {
@@ -60,6 +61,9 @@ private:
     bool removeKeybindGroup(std::string actionID, std::vector<std::string> actionMaps, std::string currentBinding);
 
     void listenForInput();
+
+    void drawActionMapAction(CActionMapAction *mappedAction, std::string actionID, std::string actionMap);
+    void drawActionMapActionGroup(std::string actionID, std::vector<std::string> actionMaps, std::string primaryActionMap);
 
     EActionInputDevice m_device;
 
