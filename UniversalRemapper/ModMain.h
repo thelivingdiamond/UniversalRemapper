@@ -62,6 +62,8 @@ private:
 
     void listenForInput();
 
+    void clearInput();
+
     void drawActionMapAction(CActionMapAction *mappedAction, std::string actionID, std::string actionMap);
     void drawActionMapActionGroup(std::string actionID, std::vector<std::string> actionMaps, std::string primaryActionMap);
 
@@ -83,6 +85,9 @@ private:
     std::string m_currentBinding;
     std::string m_newBinding;
 
+    bool m_bShowActionMapContextMenu = false;
+    void setActionMapContextMenu(bool bShow, std::string actionID, std::string actionMap, std::string currentBinding = "", bool bGroup = false, std::vector<std::string> = {});
+    void drawActionMapContextMenu();
 };
 
 extern ModMain* gMod;

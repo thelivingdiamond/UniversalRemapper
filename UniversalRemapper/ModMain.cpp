@@ -158,12 +158,12 @@ bool ModMain::removeKeybind(std::string actionID, std::string actionMap, std::st
         CryError("Action %s not found in ActionMap %s", actionID.c_str(), actionMap.c_str());
         return false;
     }*/
-   actionMapPtr->RemoveActionInput(CCryName(actionID.c_str()), currentBinding.c_str());
-//    m_bListeningForInput = true;
-//    m_actionMap = actionMap;
-//    m_actionID = actionID;
-//    m_currentBinding = currentBinding;
-//    m_keybindAction = KeybindAction::Remove;
+//   actionMapPtr->RemoveActionInput(CCryName(actionID.c_str()), currentBinding.c_str());
+        m_bListeningForInput = true;
+        m_actionMap = actionMap;
+        m_actionID = actionID;
+        m_currentBinding = currentBinding;
+        m_keybindAction = KeybindAction::Remove;
     return true;
 }
 
@@ -397,6 +397,7 @@ void ModMain::Draw()
                 ImGui::EndTabBar();
             }
         }
+        drawActionMapContextMenu();
         ImGui::End();
         ImGui::PopStyleVar();
     }
@@ -430,31 +431,30 @@ void ModMain::listenForInput() {
     if(m_bListeningForInput){
         // time to remap
         if(listener.isEventValid() || m_keybindAction == KeybindAction::Remove){
-
             auto event = listener.getLastEvent();
             // filter out escape, commit, maxis x y and z
-            if(event.keyId == EKeyId::eKI_Escape || event.keyId == EKeyId::eKI_SYS_Commit || event.keyId == EKeyId::eKI_MouseX || event.keyId == EKeyId::eKI_MouseY || event.keyId == EKeyId::eKI_MouseZ){
+            if((event.keyId == EKeyId::eKI_Escape || event.keyId == EKeyId::eKI_SYS_Commit || event.keyId == EKeyId::eKI_MouseX || event.keyId == EKeyId::eKI_MouseY || event.keyId == EKeyId::eKI_MouseZ) && m_keybindAction != KeybindAction::Remove){
                 // abort this operation
-                m_bListeningForInput = false;
-                m_actionID.clear();
-                m_actionMap.clear();
-                m_currentBinding.clear();
-                m_keybindAction = KeybindAction::None;
-                m_bGroup = false;
+                clearInput();
                 return;
+            }
+            if(event.keyName.key != nullptr) {
+                if (event.keyName.key == m_currentBinding && m_keybindAction != KeybindAction::Remove) {
+                    CryLog("Keybind already exists");
+                    // abort this operation
+                    clearInput();
+                    return;
+                }
             }
             auto ActionMapManager = (CActionMapManager *) gCL->cl->GetFramework()->GetIActionMapManager();
             bool success = false;
             SActionInput input;
             if(!m_bGroup) {
+                CryLog("Individual");
                 auto ActionMap = ActionMapManager->m_actionMaps[m_actionMap.c_str()];
                 if (ActionMap == nullptr) {
                     CryError("Action map %s not found", m_actionMap.c_str());
-                    m_bListeningForInput = false;
-                    m_actionID.clear();
-                    m_actionMap.clear();
-                    m_currentBinding.clear();
-                    m_keybindAction = KeybindAction::None;
+                    clearInput();
                     return;
                 }
                 switch (m_keybindAction) {
@@ -468,7 +468,6 @@ void ModMain::listenForInput() {
                         } else if (event.deviceType == eIDT_Gamepad) {
                             input.inputDevice = EActionInputDevice::eAID_XboxPad;
                         }
-//                        input.inputDevice = EActionInputDevice::eAID_KeyboardMouse;
                         input.inputCRC = CCrc32::ComputeLowercase(input.input.c_str());
                         success = ActionMap->AddAndBindActionInput(CCryName(m_actionID.c_str()), input);
                         break;
@@ -510,26 +509,35 @@ void ModMain::listenForInput() {
                             }
                             input.inputDevice = EActionInputDevice::eAID_KeyboardMouse;
                             input.inputCRC = CCrc32::ComputeLowercase(input.input.c_str());
-                            success |= ActionMap->AddAndBindActionInput(CCryName(m_actionID.c_str()), input);
+                            success = ActionMap->AddAndBindActionInput(CCryName(m_actionID.c_str()), input);
+                            if(!success){
+                                CryError("Failed to add keybind to %s", actionMap.c_str());
+                            }
                             break;
                         case KeybindAction::Remove:
                             CryLog("Removing");
-                            success |= ActionMap->RemoveActionInput(CCryName(m_actionID.c_str()), m_currentBinding.c_str());
+                            success = ActionMap->RemoveActionInput(CCryName(m_actionID.c_str()), m_currentBinding.c_str());
+                            if(!success){
+                                CryError("Failed to remove keybind from %s", actionMap.c_str());
+                            }
                             break;
                         case KeybindAction::Rebind:
                             CryLog("Rebinding");
-                            success |= ActionMap->ReBindActionInput(CCryName(m_actionID.c_str()), m_currentBinding.c_str(), event.keyName.key);
+                            success = ActionMap->ReBindActionInput(CCryName(m_actionID.c_str()), m_currentBinding.c_str(), event.keyName.key);
+                            if(!success){
+                                CryError("Failed to rebind keybind in %s", actionMap.c_str());
+                            }
                             break;
                     }
                 }
+                if(success){
+                    CryLog("remapped successfully");
+                }
+                else{
+                    CryError("remapping failed");
+                }
             }
-            m_bListeningForInput = false;
-            m_actionID.clear();
-            m_actionMap.clear();
-            m_currentBinding.clear();
-            m_keybindAction = KeybindAction::None;
-            m_bGroup = false;
-            m_actionMaps.clear();
+            clearInput();
         }
     }
 
@@ -565,10 +573,7 @@ bool ModMain::addKeybindGroup(std::string actionID, std::vector<std::string> act
 }
 
 bool ModMain::removeKeybindGroup(std::string actionID, std::vector<std::string> actionMaps, std::string currentBinding) {
-    if(m_bListeningForInput){
-        CryError("Already listening for input");
-        return false;
-    }
+    CryLog("Removing keybind group");
     m_bListeningForInput = true;
     m_bGroup = true;
     m_actionID = actionID;
@@ -589,11 +594,12 @@ void ModMain::drawActionMapAction(CActionMapAction *mappedAction, std::string ac
                                             && m_actionID == actionID
                                             && m_actionMap == actionMap
                                             && m_currentBinding == actionInput->input.c_str();
-                if(ImGui::Selectable(actionInput->input.c_str(), selectedForListening)){
+                if(ImGui::Selectable(actionInput->input.c_str(), selectedForListening)  && ImGui::IsItemHovered()){
                     rebindKeybind(actionID, actionMap, actionInput->input.c_str());
                 }
                 if(ImGui::IsItemClicked(ImGuiMouseButton_Right)){
-                    removeKeybind(actionID, actionMap, actionInput->input.c_str());
+                    setActionMapContextMenu(true, actionID, actionMap, actionInput->input.c_str());
+//                    removeKeybind(actionID, actionMap, actionInput->input.c_str());
                 }
             }
         }
@@ -605,6 +611,9 @@ void ModMain::drawActionMapAction(CActionMapAction *mappedAction, std::string ac
                                         && m_currentBinding.empty();
             if(ImGui::Selectable(("None##" + actionMap + actionID).c_str(), selectedForListening)){
                 addKeybind(actionID, actionMap);
+            }
+            if(ImGui::IsItemClicked(ImGuiMouseButton_Right) && ImGui::IsItemHovered()){
+                setActionMapContextMenu(true, actionID, actionMap, "");
             }
             ImGui::PopStyleColor();
         } else if (!action->m_actionInputs.empty()) {
@@ -645,8 +654,9 @@ void ModMain::drawActionMapActionGroup(std::string actionID, std::vector<std::st
 //                    rebindKeybind(actionID, actionMap, actionInput->input.c_str());
                     rebindKeybindGroup(actionID, actionMaps, actionInput->input.c_str());
                 }
-                if(ImGui::IsItemClicked(ImGuiMouseButton_Right)){
-                    removeKeybindGroup(actionID, actionMaps, actionInput->input.c_str());
+                if(ImGui::IsItemClicked(ImGuiMouseButton_Right) && ImGui::IsItemHovered()){
+//                    removeKeybindGroup(actionID, actionMaps, actionInput->input.c_str());
+                    setActionMapContextMenu(true, actionID, primaryActionMap, actionInput->input.c_str(), true, actionMaps);
                 }
             }
         }
@@ -659,6 +669,9 @@ void ModMain::drawActionMapActionGroup(std::string actionID, std::vector<std::st
             if(ImGui::Selectable("None", selectedForListening)){
                 addKeybindGroup(actionID, actionMaps);
             }
+            if(ImGui::IsItemClicked(ImGuiMouseButton_Right) && ImGui::IsItemHovered()){
+                setActionMapContextMenu(true, actionID, primaryActionMap, "", true, actionMaps);
+            }
             ImGui::PopStyleColor();
         } else if (!action->m_actionInputs.empty()) {
             ImGui::TableNextColumn();
@@ -668,6 +681,64 @@ void ModMain::drawActionMapActionGroup(std::string actionID, std::vector<std::st
         }
     } else {
         ImGui::TextDisabled("Action Not Found");
+    }
+}
+
+void ModMain::clearInput() {
+    m_keybindAction = KeybindAction::None;
+    m_bListeningForInput = false;
+    m_actionID.clear();
+    m_actionMap.clear();
+    m_currentBinding.clear();
+    m_bGroup = false;
+    m_actionMaps.clear();
+}
+
+void ModMain::setActionMapContextMenu(bool bShow, std::string actionID, std::string actionMap, std::string currentBinding, bool bGroup, std::vector<std::string> actionMaps) {
+    m_bShowActionMapContextMenu = bShow;
+    m_actionID = actionID;
+    m_actionMap = actionMap;
+    m_currentBinding = currentBinding;
+    m_bGroup = bGroup;
+    if(bGroup){
+        m_actionMaps = actionMaps;
+    }
+}
+
+void ModMain::drawActionMapContextMenu() {
+    if(m_bShowActionMapContextMenu){
+        ImGui::OpenPopup("Action Map Context Menu");
+        m_bShowActionMapContextMenu = false;
+    }
+    if(!m_bGroup) {
+        if (ImGui::BeginPopupContextWindow("Action Map Context Menu")) {
+            ImGui::Text("%s: %s", m_actionMap.c_str(), m_actionID.c_str());
+            ImGui::Separator();
+            if (ImGui::Selectable("Rebind")) {
+                rebindKeybind(m_actionID, m_actionMap, m_currentBinding);
+            }
+            if (ImGui::Selectable("Remove")) {
+                removeKeybind(m_actionID, m_actionMap, m_currentBinding);
+            }
+            ImGui::EndPopup();
+        }
+    }
+    else {
+        if(ImGui::BeginPopupContextWindow("Action Map Context Menu")){
+            ImGui::Text("%s *: %s", m_actionMap.c_str(), m_actionID.c_str());
+            for(auto &actionMap: m_actionMaps){
+                ImGui::Text("%s", actionMap.c_str());
+            }
+            ImGui::Separator();
+            if(ImGui::Selectable("Rebind")){
+                rebindKeybindGroup(m_actionID, m_actionMaps, m_currentBinding);
+            }
+            if(ImGui::Selectable("Remove")){
+                removeKeybindGroup(m_actionID, m_actionMaps, m_currentBinding);
+            }
+            ImGui::EndPopup();
+        }
+
     }
 }
 
