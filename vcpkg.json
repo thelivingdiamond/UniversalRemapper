@@ -1,5 +1,5 @@
 {
-  "name": "chairloader",
+  "name": "universal-remapper",
   "version-string": "0.1.0",
   "description": "An extensible Prey (2017) modding framework",
   "builtin-baseline": "faed44dfa013088fe1910908a8a65887622f412f",
@@ -10,6 +10,7 @@
     "boost-json",
     "detours",
     "libzip",
-    "pugixml"
+    "pugixml",
+    "fmt"
   ]
 }

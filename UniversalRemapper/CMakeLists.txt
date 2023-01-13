@@ -6,7 +6,7 @@ set(SOURCE_FILES
 	ModMain.cpp
 	ModMain.h
 	pch.h
-		RemapperKeyEventListener.cpp RemapperKeyEventListener.h)
+		RemapperKeyEventListener.cpp RemapperKeyEventListener.h IUniversalRemapper.h)
 
 add_library(${MOD_NAME} SHARED ${SOURCE_FILES})
 target_link_libraries(${MOD_NAME}
