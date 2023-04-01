@@ -6,7 +6,11 @@ This is a mod for the game Prey (2017) that allows you to remap keys to your lik
 
 - Remap any key in the game to any other key on your keyboard or mouse
 - Save and load custom key mappings
-- Intuitive user interface
+- Feature-rich user interface
+
+![Universal Remapper](https://user-images.githubusercontent.com/11778849/229263976-a21d9638-fe04-4fe0-9f36-343fe26ca095.png)
+
+
 
 ## Installation
 
